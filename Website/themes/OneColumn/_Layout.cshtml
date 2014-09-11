@@ -66,12 +66,12 @@
     </div>
 
     <footer class="text-center" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
-        @if (!User.Identity.IsAuthenticated)
+        @*@if (!User.Identity.IsAuthenticated)
         {
             <span class="pull-right">
                 <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
             </span>
-        }
+        }*@
         <span>
             Copyright &copy; @DateTime.Now.Year
             <a href="http://mattserbinski.com" itemprop="url name">matt serbinski</a>
