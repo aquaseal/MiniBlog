@@ -1,6 +1,6 @@
 ﻿@{
-	string next = Blog.GetNextPage();
-	string prev = Blog.GetPrevPage();
+    string next = Blog.GetNextPage();
+    string prev = Blog.GetPrevPage();
 }
 <!doctype html>
 <html lang="en-us">
@@ -28,14 +28,26 @@
     <meta property="og:image" content="@Blog.Image" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
-	@if (!string.IsNullOrEmpty(prev))
-	{
-		<link rel="prev" href="@prev" />
-	}
-	@if (!string.IsNullOrEmpty(next))
-	{
-		<link rel="next" href="@next" />
-	}
+    @if (!string.IsNullOrEmpty(prev))
+    {
+        <link rel="prev" href="@prev" />
+    }
+    @if (!string.IsNullOrEmpty(next))
+    {
+        <link rel="next" href="@next" />
+    }
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-5923838-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
@@ -67,11 +79,11 @@
 
     <footer class="text-center" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
         @*@if (!User.Identity.IsAuthenticated)
-        {
-            <span class="pull-right">
-                <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
-            </span>
-        }*@
+            {
+                <span class="pull-right">
+                    <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
+                </span>
+            }*@
         <span>
             Copyright &copy; @DateTime.Now.Year
             <a href="http://mattserbinski.com" itemprop="url name">matt serbinski</a>
