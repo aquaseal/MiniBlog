@@ -198,7 +198,7 @@ input[type], button, textarea {
             }
 
     #comments article.self div p {
-        background-color: #cde8a6;
+        background-color: #83D3FC;
         border: 1px solid #b3b3b3;
     }
 
@@ -207,7 +207,7 @@ input[type], button, textarea {
         }
 
         #comments article.self div p:after {
-            border-color: transparent #cde8a6;
+            border-color: transparent #83D3FC;
         }
 
     #comments article [itemprop='commentText'] {
