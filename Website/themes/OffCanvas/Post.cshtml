@@ -17,7 +17,7 @@ else
                 <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
                 <a href="@Model.Url#comments">
                     <em class="glyphicon glyphicon-comment"></em>
-                    @Model.CountApprovedComments(Context) Comments
+                    @(Model.CountApprovedComments(Context) == 1 ? Model.CountApprovedComments(Context) + " comment" : Model.CountApprovedComments(Context) + " comments")
                 </a>
                 @Categories()
             </div>

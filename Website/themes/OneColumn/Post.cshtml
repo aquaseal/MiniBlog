@@ -7,7 +7,7 @@
             <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
             <a href="@Model.Url#comments">
                 <em class="glyphicon glyphicon-comment"></em>
-                @Model.CountApprovedComments(Context) Comments
+                @(Model.CountApprovedComments(Context) == 1 ? Model.CountApprovedComments(Context) + " comment" : Model.CountApprovedComments(Context) + " comments")
             </a>
             @Categories()
         </div>
@@ -20,45 +20,45 @@
             <div itemprop="description">@Model.Excerpt</div>
         </div>
     }
-    
-    @* If you want to use excerpts rather than full content in list view then uncomment the below 
+
+    @* If you want to use excerpts rather than full content in list view then uncomment the below
         and remove the other articleBody div *@
-    @*@if (Blog.CurrentPost == null)
-    {
-        <div itemprop="articleBody">@Model.Excerpt</div>
-    }
-    else
-    {
-        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
-    }*@
-    
-    <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
-
-    @if (Blog.CurrentPost != null)
-    {
-        <section id="comments" aria-label="Comments">
-            @if (Model.CountApprovedComments(Context) > 0)
+        @*@if (Blog.CurrentPost == null)
             {
-                <h2>Comments</h2>
+                <div itemprop="articleBody">@Model.Excerpt</div>
             }
-
-            @foreach (Comment comment in Model.Comments)
+            else
             {
-                if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
-                {
-                    @RenderPage("Comment.cshtml", comment)
-                }
-            }
-        </section>
+                <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+            }*@
 
-        if (Model.AreCommentsOpen(Context))
+        <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
+
+        @if (Blog.CurrentPost != null)
         {
-            @RenderPage("~/views/CommentForm.cshtml")
-        }
-    }
-</article>
+            <section id="comments" aria-label="Comments">
+                @if (Model.CountApprovedComments(Context) > 0)
+                {
+                    <h2>Comments</h2>
+                }
 
-@helper Categories()
+                @foreach (Comment comment in Model.Comments)
+                {
+                    if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
+                    {
+                        @RenderPage("Comment.cshtml", comment)
+                    }
+                }
+            </section>
+
+            if (Model.AreCommentsOpen(Context))
+            {
+                @RenderPage("~/views/CommentForm.cshtml")
+            }
+        }
+    </article>
+
+    @helper Categories()
 {
     if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
     {
