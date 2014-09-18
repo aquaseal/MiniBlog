@@ -85,17 +85,28 @@
         </div>
     </div>
 
-    <footer class="text-center" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <span class="pull-right">
-                <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
-            </span>
-        }
-        <span>
-            Copyright &copy; @DateTime.Now.Year
-            <a href="http://mattserbinski.com" itemprop="url name">matt serbinski</a>
-        </span>
+    <footer role="contentinfo">
+        <div>
+            @*@if (!User.Identity.IsAuthenticated)
+                {
+                    <span class="pull-right">
+                        <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="glyphicon glyphicon-log-in"></i></a>
+                    </span>
+                }*@
+            <ul>
+                <li>me</li>
+                <li><a href="http://twitter.com/aquaseal">twitter</a></li>
+                <li><a href="https://github.com/aquaseal">github</a></li>
+                <li><a href="http://linkedin.com/in/matthewserbinski">linkedin</a></li>
+            </ul>
+            <ul>
+                <li>side projects</li>
+            </ul>
+            <p>
+                Copyright &copy; @DateTime.Now.Year
+                <a href="http://mattserbinski.com" itemprop="url name">matt serbinski</a>
+            </p>
+        </div>
     </footer>
 
 
