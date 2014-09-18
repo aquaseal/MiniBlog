@@ -123,6 +123,7 @@ a {
 div[role=main] {
     margin-bottom: 2em;
     overflow: auto;
+    clear: both;
 }
 
 .pager {
@@ -388,7 +389,7 @@ footer {
     position: relative;
     bottom: 30px;
     z-index: 5;
-    width: 100%;
+    width: 30%;
     padding: 0;
     list-style: none;
 }

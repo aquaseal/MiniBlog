@@ -57,6 +57,20 @@
             <em>@Blog.Description</em>
         </header>
 
+        <nav class="col-md-8 col-md-offset-2">
+            <ul id="nav">
+                <li>
+                    <a aria-haspopup="true" href="javascript:void(0)">post categories</a>
+                    <ul>
+                        @foreach (var cat in Blog.GetCategories())
+                        {
+                            <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())"><span>@cat.Value</span> <span>@cat.Key</span></a></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
         <div role="main" class="col-md-8 col-md-offset-2">
             @RenderBody()
 
