@@ -218,7 +218,7 @@ input[type], button, textarea {
         width: 100%;
     }
 
-        .post table tr:nth-child(even) {
+        .post table tbody tr:nth-child(odd) {
             background: #f7f7f7;
         }
 
