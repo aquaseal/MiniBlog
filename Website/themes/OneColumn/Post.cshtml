@@ -20,45 +20,45 @@
             <div itemprop="description">@Model.Excerpt</div>
         </div>
     }
-
-    @* If you want to use excerpts rather than full content in list view then uncomment the below
+    
+    @* If you want to use excerpts rather than full content in list view then uncomment the below 
         and remove the other articleBody div *@
-        @*@if (Blog.CurrentPost == null)
+    @*@if (Blog.CurrentPost == null)
+    {
+        <div itemprop="articleBody">@Model.Excerpt</div>
+    }
+    else
+    {
+        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    }*@
+    
+    <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
+
+    @if (Blog.CurrentPost != null)
+    {
+        <section id="comments" aria-label="Comments">
+            @if (Model.CountApprovedComments(Context) > 0)
             {
-                <div itemprop="articleBody">@Model.Excerpt</div>
+                <h2>Comments</h2>
             }
-            else
+
+            @foreach (Comment comment in Model.Comments)
             {
-                <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
-            }*@
+                if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
+                {
+                    @RenderPage("Comment.cshtml", comment)
+                }
+            }
+        </section>
 
-        <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
-
-        @if (Blog.CurrentPost != null)
+        if (Model.AreCommentsOpen(Context))
         {
-            <section id="comments" aria-label="Comments">
-                @if (Model.CountApprovedComments(Context) > 0)
-                {
-                    <h2>Comments</h2>
-                }
-
-                @foreach (Comment comment in Model.Comments)
-                {
-                    if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
-                    {
-                        @RenderPage("Comment.cshtml", comment)
-                    }
-                }
-            </section>
-
-            if (Model.AreCommentsOpen(Context))
-            {
-                @RenderPage("~/views/CommentForm.cshtml")
-            }
+            @RenderPage("~/views/CommentForm.cshtml")
         }
-    </article>
+    }
+</article>
 
-    @helper Categories()
+@helper Categories()
 {
     if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
     {
